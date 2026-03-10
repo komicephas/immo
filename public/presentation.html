@@ -224,6 +224,42 @@
       font-size: 12px;
       text-decoration: none;
     }
+    .team-grid {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 32px;
+    }
+    .team-card {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(26,45,107,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      padding: 12px;
+    }
+    .team-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .team-role {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.9rem;
+      color: var(--navy);
+    }
+    .team-name {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
     .finance-box {
       background: rgba(245, 240, 232, 0.7);
       border: 1px solid rgba(26,45,107,0.2);
@@ -723,20 +759,22 @@
               <span class="tag">Promoteur</span><span class="tag">Gestionnaire</span><span class="tag">Artisans</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f3f6ff" />
-              <g stroke="#4a9c2f" stroke-width="4">
-                <line x1="420" y1="200" x2="320" y2="300" />
-                <line x1="420" y1="200" x2="520" y2="300" />
-              </g>
-              <circle cx="420" cy="180" r="46" fill="#1a2d6b" />
-              <circle cx="320" cy="320" r="40" fill="#4a9c2f" />
-              <circle cx="520" cy="320" r="40" fill="#c8cdd6" />
-              <text x="405" y="185" fill="#ffffff" font-size="14">PR</text>
-              <text x="305" y="325" fill="#ffffff" font-size="14">GE</text>
-              <text x="505" y="325" fill="#1a2d6b" font-size="14">AR</text>
-            </svg>
+          <div class="team-grid">
+            <div class="team-card">
+              <img src="/team-promoteur.jpeg" alt="Promoteur" />
+              <div class="team-role">Promoteur</div>
+              <div class="team-name">AKOVI KOMI CEPHAS JUNIOR</div>
+            </div>
+            <div class="team-card">
+              <img src="/team-gestionnaire.jpeg" alt="Gestionnaire" />
+              <div class="team-role">Gestionnaire</div>
+              <div class="team-name">KLOMEGN AGNES ERICA</div>
+            </div>
+            <div class="team-card">
+              <img src="/team-artisan.jpeg" alt="Artisans partenaires" />
+              <div class="team-role">Artisans partenaires</div>
+              <div class="team-name">PEREIRA DA SILVA Péniel</div>
+            </div>
           </div>
         </div>
 
