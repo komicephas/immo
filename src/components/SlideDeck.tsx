@@ -1,8 +1,6 @@
 ﻿"use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import MaquetteScene from "@/components/MaquetteScene";
-
 const slides = [
   {
     id: "cover",
@@ -295,7 +293,11 @@ export default function SlideDeck() {
                     ))}
                   </div>
                   <div className="slide-visual-card">
-                    <MaquetteScene />
+                    <iframe
+                      title="Maquette Cour Immo"
+                      src="/maquette.html"
+                      className="h-full w-full border-0"
+                    />
                   </div>
                 </div>
               ) : (
@@ -314,5 +316,6 @@ export default function SlideDeck() {
     </div>
   );
 }
+
 
 

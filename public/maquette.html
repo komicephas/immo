@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cour Immo — Maquette 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a96e;
+      --dark: #0a0a0f;
+      --text: #f0ece4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #87ceeb;
+      font-family: "Jost", sans-serif;
+      overflow: hidden;
+      color: var(--text);
+    }
+
+    #scene {
+      position: absolute;
+      inset: 0;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .header {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .header img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    }
+
+    .header-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .header-subtitle {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .info-panel {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 10;
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-card {
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(10, 10, 15, 0.6);
+      border: 1px solid rgba(201, 169, 110, 0.5);
+      backdrop-filter: blur(10px);
+      min-width: 160px;
+    }
+
+    .info-card span {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .info-card strong {
+      display: block;
+      margin-top: 6px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 20px;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(10, 10, 15, 0.7);
+      border: 1px solid rgba(201, 169, 110, 0.7);
+      backdrop-filter: blur(14px);
+      z-index: 10;
+    }
+
+    .controls button {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-family: "Jost", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .controls button.active,
+    .controls button:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .loader {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: #0a0a0f;
+      z-index: 20;
+      transition: opacity 0.6s ease;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-bar {
+      width: 220px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.2);
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .loader-bar span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: var(--gold);
+      animation: load 1.8s ease forwards;
+    }
+
+    @keyframes load {
+      to {
+        width: 100%;
+      }
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="header-title">Cour Immo</div>
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <div id="scene">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div class="header">
+    <img src="/logo.png" alt="Cour Immo" />
+    <div>
+      <div class="header-title">Résidence Lumière</div>
+      <div class="header-subtitle">Cour Immo</div>
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <div class="info-card">
+      <span>Nb unités</span>
+      <strong>8 studios</strong>
+    </div>
+    <div class="info-card">
+      <span>Surface</span>
+      <strong>92 m²</strong>
+    </div>
+    <div class="info-card">
+      <span>Disponibilité</span>
+      <strong>Q4 2026</strong>
+    </div>
+  </div>
+
+  <div class="controls" id="controls">
+    <button data-mode="day" class="active">Jour</button>
+    <button data-mode="night">?? Nuit</button>
+    <button data-view="top">Vue dessus</button>
+    <button data-view="facade">Vue façade</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x87ceeb);
+    scene.fog = new THREE.FogExp2(0x87ceeb, 0.015);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
+    camera.position.set(18, 14, 18);
+    camera.lookAt(0, 1, 0);
+
+    const target = new THREE.Vector3(0, 1, 0);
+    let targetTheta = Math.PI / 4;
+    let targetPhi = 1.1;
+    let targetRadius = 20;
+    let theta = targetTheta;
+    let phi = targetPhi;
+    let radius = targetRadius;
+    let isDragging = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    const materials = {
+      wall: new THREE.MeshStandardMaterial({ color: 0xf0ece0, roughness: 0.85 }),
+      roof: new THREE.MeshStandardMaterial({ color: 0x3a3a3d, roughness: 0.9 }),
+      pavement: new THREE.MeshStandardMaterial({ color: 0xc8bfb0, roughness: 0.95 }),
+      glass: new THREE.MeshStandardMaterial({
+        color: 0x7aaccc,
+        roughness: 0.2,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.35,
+      }),
+      frame: new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4 }),
+      wood: new THREE.MeshStandardMaterial({ color: 0x8b5e3c, roughness: 0.6 }),
+      lawn: new THREE.MeshStandardMaterial({ color: 0x4a8c3f, roughness: 1.0 }),
+      canopy: new THREE.MeshStandardMaterial({ color: 0x2d6b28, roughness: 1.0 }),
+      column: new THREE.MeshStandardMaterial({ color: 0xe8e4d8, roughness: 0.7 }),
+      trim: new THREE.MeshStandardMaterial({ color: 0xd8d2c0, roughness: 0.7 }),
+    };
+
+    const ambient = new THREE.AmbientLight(0xd0e8ff, 0.4);
+    scene.add(ambient);
+
+    const sun = new THREE.DirectionalLight(0xfff8e8, 1.6);
+    sun.position.set(15, 20, 10);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    scene.add(sun);
+
+    const lampLights = [];
+
+    function createHippedRoof(width, depth, height) {
+      const hw = width / 2;
+      const hd = depth / 2;
+      const geometry = new THREE.BufferGeometry();
+      const vertices = new Float32Array([
+        -hw, 0, -hd,   hw, 0, -hd,   0, height, 0,
+         hw, 0, -hd,   hw, 0,  hd,   0, height, 0,
+         hw, 0,  hd,  -hw, 0,  hd,   0, height, 0,
+        -hw, 0,  hd,  -hw, 0, -hd,   0, height, 0,
+      ]);
+      geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+      geometry.computeVertexNormals();
+      return geometry;
+    }
+
+    function createWindow(x, y, z) {
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.7, 0.08), materials.frame);
+      frame.position.set(x, y, z);
+      const glass = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.55, 0.02), materials.glass);
+      glass.position.set(x, y, z + 0.04);
+      return [frame, glass];
+    }
+
+    function createUnit(position, size, mirror) {
+      const group = new THREE.Group();
+      const [w, h, d] = size;
+
+      const base = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), materials.wall);
+      base.position.y = h / 2;
+      base.castShadow = true;
+      base.receiveShadow = true;
+      group.add(base);
+
+      const roof = new THREE.Mesh(createHippedRoof(w + 0.2, d + 0.2, 0.9), materials.roof);
+      roof.position.y = h + 0.2;
+      roof.castShadow = true;
+      group.add(roof);
+
+      const door = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.9, 0.06), materials.wood);
+      door.position.set(0, 0.45, d / 2 + 0.03);
+      group.add(door);
+
+      const porch = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.2, 0.8), materials.trim);
+      porch.position.set(0, 0.1, d / 2 + 0.35);
+      porch.receiveShadow = true;
+      group.add(porch);
+
+      const column = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.8, 12), materials.column);
+      column.position.set(0.5, 0.5, d / 2 + 0.35);
+      column.castShadow = true;
+      group.add(column);
+
+      const lamp = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.2, 0.08), materials.frame);
+      lamp.position.set(-0.55, 0.65, d / 2 + 0.04);
+      group.add(lamp);
+
+      const lampLight = new THREE.PointLight(0xffcc66, 1.2, 6);
+      lampLight.position.copy(lamp.position).add(new THREE.Vector3(0, 0.1, 0.15));
+      lampLight.visible = false;
+      lampLights.push(lampLight);
+      group.add(lampLight);
+
+      const windowZ = d / 2 + 0.03;
+      const windows = createWindow(-0.9, 0.6, windowZ);
+      windows.forEach((mesh) => group.add(mesh));
+
+      const windows2 = createWindow(0.9, 0.6, windowZ);
+      windows2.forEach((mesh) => group.add(mesh));
+
+      const ac = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.28, 16), materials.frame);
+      ac.position.set(-w / 3, h + 0.4, -d / 4);
+      ac.castShadow = true;
+      group.add(ac);
+
+      const plants = new THREE.Mesh(new THREE.SphereGeometry(0.25, 12, 12), materials.canopy);
+      plants.position.set(1.1, 0.2, d / 2 + 0.6);
+      group.add(plants);
+
+      if (mirror) {
+        group.scale.z = -1;
+      }
+
+      group.position.copy(position);
+      return group;
+    }
+
+    function buildComplex() {
+      const ground = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), materials.lawn);
+      ground.rotation.x = -Math.PI / 2;
+      ground.receiveShadow = true;
+      scene.add(ground);
+
+      const courtyard = new THREE.Mesh(new THREE.BoxGeometry(30, 0.15, 14), materials.pavement);
+      courtyard.position.y = 0.08;
+      courtyard.receiveShadow = true;
+      scene.add(courtyard);
+
+      for (let i = -13; i <= 13; i += 2) {
+        for (let j = -6; j <= 6; j += 2) {
+          const tile = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.03, 1.8), materials.pavement);
+          tile.position.set(i * 0.6, 0.16, j * 0.6);
+          tile.receiveShadow = true;
+          scene.add(tile);
+        }
+      }
+
+      const rowOffset = 5.2;
+      const spacing = 5.4;
+      for (let i = 0; i < 4; i++) {
+        const x = -8 + i * spacing;
+        const size = i === 0 ? [5, 1.3, 4.6] : [4.2, 1.3, 4.2];
+        scene.add(createUnit(new THREE.Vector3(x, 0, rowOffset), size, false));
+        scene.add(createUnit(new THREE.Vector3(x, 0, -rowOffset), size, true));
+      }
+
+      const boundary = new THREE.Mesh(new THREE.BoxGeometry(0.6, 1, 30), materials.trim);
+      boundary.position.set(12.8, 0.5, 0);
+      boundary.receiveShadow = true;
+      scene.add(boundary);
+
+      const trees = [
+        [-18, -18],
+        [18, -18],
+        [18, 18],
+        [-18, 18],
+      ];
+      trees.forEach(([x, z]) => {
+        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 3, 12), new THREE.MeshStandardMaterial({ color: 0x6b4a2f, roughness: 0.8 }));
+        trunk.position.set(x, 1.5, z);
+        trunk.castShadow = true;
+        const canopy = new THREE.Mesh(new THREE.SphereGeometry(1.8, 16, 16), materials.canopy);
+        canopy.position.set(x, 4, z);
+        canopy.castShadow = true;
+        scene.add(trunk, canopy);
+      });
+
+      for (let i = 0; i < 6; i++) {
+        const shrub = new THREE.Mesh(new THREE.SphereGeometry(0.4, 12, 12), materials.canopy);
+        shrub.position.set(-10 + i * 3.5, 0.2, rowOffset + 2.4);
+        scene.add(shrub);
+        const shrub2 = shrub.clone();
+        shrub2.position.z = -rowOffset - 2.4;
+        scene.add(shrub2);
+      }
+    }
+
+    buildComplex();
+
+    function setMode(mode) {
+      if (mode === 'night') {
+        sun.intensity = 0.05;
+        scene.background.set(0x050810);
+        scene.fog.color.set(0x050810);
+        lampLights.forEach((light) => (light.visible = true));
+      } else {
+        sun.intensity = 1.6;
+        scene.background.set(0x87ceeb);
+        scene.fog.color.set(0x87ceeb);
+        lampLights.forEach((light) => (light.visible = false));
+      }
+    }
+
+    function setView(view) {
+      if (view === 'top') {
+        targetPhi = 0.05;
+        targetRadius = 22;
+      } else if (view === 'facade') {
+        targetPhi = 1.3;
+        targetRadius = 16;
+        targetTheta = 0;
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (!isDragging) {
+        targetTheta += 0.0008;
+      }
+      theta += (targetTheta - theta) * 0.07;
+      phi += (targetPhi - phi) * 0.07;
+      radius += (targetRadius - radius) * 0.07;
+
+      phi = Math.max(0.05, Math.min(Math.PI / 2.05, phi));
+
+      const x = radius * Math.sin(phi) * Math.cos(theta);
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      camera.position.set(x, y, z);
+      camera.lookAt(target);
+
+      renderer.render(scene, camera);
+    }
+
+    function onPointerDown(event) {
+      isDragging = true;
+      lastX = event.clientX;
+      lastY = event.clientY;
+    }
+
+    function onPointerMove(event) {
+      if (!isDragging) return;
+      const dx = event.clientX - lastX;
+      const dy = event.clientY - lastY;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      targetTheta -= dx * 0.005;
+      targetPhi = Math.min(Math.PI / 2.05, Math.max(0.05, targetPhi + dy * 0.005));
+    }
+
+    function onPointerUp() {
+      isDragging = false;
+    }
+
+    function onWheel(event) {
+      targetRadius = Math.min(30, Math.max(10, targetRadius + event.deltaY * 0.01));
+    }
+
+    canvas.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+    canvas.addEventListener('wheel', onWheel);
+
+    canvas.addEventListener('touchstart', (event) => {
+      if (event.touches.length === 1) {
+        onPointerDown(event.touches[0]);
+      }
+    });
+    canvas.addEventListener('touchmove', (event) => {
+      if (event.touches.length === 1) {
+        onPointerMove(event.touches[0]);
+      }
+    });
+    canvas.addEventListener('touchend', onPointerUp);
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    document.querySelectorAll('[data-mode]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-mode]').forEach((b) => b.classList.remove('active'));
+        button.classList.add('active');
+        setMode(button.dataset.mode);
+      });
+    });
+
+    document.querySelectorAll('[data-view]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-view]').forEach((b) => b.classList.remove('active'));
+        button.classList.add('active');
+        setView(button.dataset.view);
+      });
+    });
+
+    animate();
+
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 1800);
+  </script>
+</body>
+</html>
+
