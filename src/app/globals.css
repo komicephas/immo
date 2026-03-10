@@ -1,13 +1,14 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --sand-1: #f6f1e9;
-  --sand-2: #efe5d6;
-  --sand-3: #e6d8c6;
-  --ink-1: #1d1b16;
-  --ink-2: #3a352c;
-  --copper: #b07a4a;
-  --olive: #6b7a56;
+  --sand-1: #f4f7fb;
+  --sand-2: #e6eef8;
+  --sand-3: #d7e4f3;
+  --ink-1: #0f2b57;
+  --ink-2: #2b4d7a;
+  --copper: #2c6fb8;
+  --olive: #57b93a;
+  --accent: #18a2d8;
 }
 
 * {
@@ -20,7 +21,7 @@ body {
 }
 
 body {
-  background: radial-gradient(1200px 600px at 10% -10%, #ffffff 0%, var(--sand-1) 40%, var(--sand-2) 100%);
+  background: radial-gradient(1200px 600px at 10% -10%, #ffffff 0%, var(--sand-1) 45%, var(--sand-2) 100%);
   color: var(--ink-1);
   font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   min-height: 100vh;
@@ -99,7 +100,7 @@ body {
 .slide-chip {
   width: fit-content;
   border-radius: 999px;
-  border: 1px solid rgba(29, 27, 22, 0.2);
+  border: 1px solid rgba(15, 43, 87, 0.2);
   padding: 0.25rem 0.9rem;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -129,16 +130,16 @@ body {
 }
 
 .slide-cover {
-  background: radial-gradient(circle at top, rgba(176, 122, 74, 0.15), transparent 55%),
-    linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(236, 223, 205, 0.6));
+  background: radial-gradient(circle at top, rgba(24, 162, 216, 0.2), transparent 55%),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.85), rgba(214, 229, 248, 0.7));
 }
 
 .slide-standard {
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.85), rgba(236, 223, 205, 0.5));
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.88), rgba(214, 229, 248, 0.6));
 }
 
 .slide-visual {
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.85), rgba(236, 223, 205, 0.5));
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.88), rgba(214, 229, 248, 0.6));
 }
 
 .slide-visual-grid {
@@ -155,6 +156,30 @@ body {
   overflow: hidden;
 }
 
+.slide-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.slide-button {
+  border-radius: 999px;
+  border: 1px solid rgba(15, 43, 87, 0.2);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-1);
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
+}
+
+.slide-button.active,
+.slide-button:hover {
+  border-color: rgba(15, 43, 87, 0.45);
+  background: var(--ink-1);
+  color: #ffffff;
+}
+
 @media (min-width: 900px) {
   .slide-inner {
     grid-template-columns: 1fr;
@@ -165,4 +190,5 @@ body {
     align-items: center;
   }
 }
+
 

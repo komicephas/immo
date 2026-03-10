@@ -272,6 +272,13 @@ export default function SlideDeck() {
             <div className="slide-inner">
               <div className="slide-meta">
                 <span className="slide-chip">Slide {index + 1}</span>
+                {slide.variant === "cover" ? (
+                  <img
+                    src="/logo.png"
+                    alt="Cour Immo"
+                    className="h-20 w-20 object-contain"
+                  />
+                ) : null}
                 <h1 className="slide-title font-display">{slide.title}</h1>
                 {slide.subtitle ? (
                   <p className="slide-subtitle">{slide.subtitle}</p>
@@ -307,4 +314,5 @@ export default function SlideDeck() {
     </div>
   );
 }
+
 
