@@ -190,6 +190,40 @@
       width: 62%;
       height: 100%;
     }
+    .photo-illustration {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .photo-illustration img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-illustration::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(232,160,48,0.15), rgba(26,45,107,0.25));
+      pointer-events: none;
+    }
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(232,160,48,0.2);
+      border: 1px solid var(--orange);
+      color: var(--navy);
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      text-decoration: none;
+    }
 
     .panel-item {
       opacity: 0;
@@ -387,40 +421,8 @@
               <span class="tag">Moderne</span><span class="tag">Accessible</span><span class="tag">Lomé</span><span class="tag">Togo</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <defs>
-                <linearGradient id="sky1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#f8b347" />
-                  <stop offset="1" stop-color="#f4d18a" />
-                </linearGradient>
-              </defs>
-              <rect width="700" height="500" fill="url(#sky1)" />
-              <g fill="#9d7b50" opacity="0.6">
-                <rect x="40" y="260" width="80" height="60" />
-                <polygon points="40,260 80,230 120,260" />
-                <rect x="140" y="240" width="90" height="70" />
-                <polygon points="140,240 185,210 230,240" />
-                <rect x="250" y="270" width="100" height="60" />
-                <polygon points="250,270 300,240 350,270" />
-                <rect x="370" y="250" width="90" height="70" />
-                <polygon points="370,250 415,220 460,250" />
-                <rect x="480" y="270" width="90" height="60" />
-                <polygon points="480,270 525,240 570,270" />
-              </g>
-              <g fill="#4a9c2f" opacity="0.9">
-                <circle cx="120" cy="360" r="26" />
-                <circle cx="220" cy="340" r="22" />
-                <circle cx="320" cy="360" r="26" />
-                <circle cx="430" cy="340" r="22" />
-                <circle cx="540" cy="360" r="26" />
-              </g>
-              <g stroke="#f5d77a" stroke-width="6" opacity="0.6">
-                <line x1="520" y1="40" x2="620" y2="140" />
-                <line x1="540" y1="10" x2="600" y2="130" />
-                <line x1="560" y1="30" x2="660" y2="150" />
-              </g>
-            </svg>
+          <div class="photo-illustration">
+            <img src="/docx-image2.jpeg" alt="Référence du compound Cour Immo" />
           </div>
         </div>
 
@@ -434,29 +436,8 @@
               <span class="tag">Démographie</span><span class="tag">Demande</span><span class="tag">Accessibilité</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="350" height="500" fill="#e6e6e6" />
-              <rect x="0" y="260" width="260" height="140" fill="#b5b5b5" />
-              <rect x="30" y="290" width="60" height="40" fill="#8f8f8f" />
-              <rect x="110" y="310" width="80" height="50" fill="#9f9f9f" />
-              <line x1="30" y1="330" x2="90" y2="330" stroke="#777" stroke-width="4" />
-              <rect x="350" y="0" width="350" height="500" fill="#e9f1ff" />
-              <rect x="470" y="120" width="160" height="300" fill="url(#glass)" />
-              <defs>
-                <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#7fb2ff" />
-                  <stop offset="1" stop-color="#305aa6" />
-                </linearGradient>
-              </defs>
-              <circle cx="350" cy="250" r="50" fill="#e05555" opacity="0.8" />
-              <line x1="540" y1="80" x2="600" y2="80" stroke="#e05555" stroke-width="4" />
-              <polygon points="600,80 590,72 590,88" fill="#e05555" />
-              <text x="520" y="70" fill="#e05555" font-size="16" font-family="Montserrat">trop cher</text>
-              <line x1="120" y1="120" x2="60" y2="120" stroke="#e05555" stroke-width="4" />
-              <polygon points="60,120 70,112 70,128" fill="#e05555" />
-              <text x="80" y="110" fill="#e05555" font-size="16" font-family="Montserrat">insalubre</text>
-            </svg>
+          <div class="photo-illustration">
+            <img src="/docx-image1.jpeg" alt="Référence habitat existant" />
           </div>
         </div>
 
@@ -489,9 +470,10 @@
           <div class="slide-number">04</div>
           <div class="left-panel">
             <div class="label panel-item">ARCHITECTURE</div>
-            <div class="title panel-item">Découvrez l'espace en 3D</div>
-            <div class="desc panel-item">Modélisation immersive de la cour rénovée. Visualisez chaque studio et les espaces communs.</div>
-            <div class="tags panel-item">
+          <div class="title panel-item">Découvrez l'espace en 3D</div>
+          <div class="desc panel-item">Modélisation immersive de la cour rénovée. Visualisez chaque studio et les espaces communs.</div>
+          <a class="cta-link panel-item" href="/maquette.html" target="_blank">Lancer la maquette 3D</a>
+          <div class="tags panel-item">
               <span class="tag">Interactif</span><span class="tag">3D</span><span class="tag">Visite guidée</span>
             </div>
           </div>
@@ -522,7 +504,7 @@
           <div class="left-panel">
             <div class="label panel-item">NOS STUDIOS</div>
             <div class="title panel-item">Deux formules adaptées</div>
-            <div class="desc panel-item">Studio Standard à 25 000 FCFA et Studio Palette à 20 000 FCFA. Tout équipé, charges incluses.</div>
+            <div class="desc panel-item">Studio Standard à 25 000 FCFA (jusqu'à 35 000 FCFA selon équipement) et Studio Palette à 20 000 FCFA. Tout équipé, charges incluses.</div>
             <div class="tags panel-item">
               <span class="tag">25 000 FCFA</span><span class="tag">20 000 FCFA</span><span class="tag">Tout équipé</span>
             </div>
@@ -641,7 +623,7 @@
           <div class="left-panel">
             <div class="label panel-item">MODÈLE ÉCONOMIQUE</div>
             <div class="title panel-item">4 étapes simples</div>
-            <div class="desc panel-item">Location, rénovation, équipement, puis gestion locative professionnelle pour une rentabilité durable.</div>
+            <div class="desc panel-item">Location longue durée des cours (8 000 FCFA/chambre), rénovation, équipement, puis gestion locative professionnelle pour une rentabilité durable.</div>
             <div class="tags panel-item">
               <span class="tag">Location</span><span class="tag">Rénovation</span><span class="tag">Gestion</span><span class="tag">Revenus</span>
             </div>
@@ -770,7 +752,7 @@
             <div class="title panel-item">2 847 000 FCFA</div>
             <div class="desc panel-item">Un investissement structuré en trois postes : avance propriétaire, équipement et rénovation.</div>
             <div class="tags panel-item">
-              <span class="tag">1 500 000</span><span class="tag">1 047 000</span><span class="tag">300 000 FCFA</span>
+              <span class="tag">1 500 000</span><span class="tag">1 347 000</span><span class="tag">300 000 FCFA</span>
             </div>
           </div>
           <div class="right-illustration">
