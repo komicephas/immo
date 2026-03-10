@@ -357,14 +357,17 @@
     const materials = {
       wall: new THREE.MeshStandardMaterial({ color: 0xf0ece0, roughness: 0.85 }),
       wallAlt: new THREE.MeshStandardMaterial({ color: 0xe8e4d8, roughness: 0.7 }),
+      base: new THREE.MeshStandardMaterial({ color: 0x2b2b2f, roughness: 0.9 }),
       roof: new THREE.MeshStandardMaterial({ color: 0x2d2d30, roughness: 0.92, side: THREE.DoubleSide }),
       windowFrame: new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4 }),
       glass: new THREE.MeshStandardMaterial({ color: 0x7aaccc, transparent: true, opacity: 0.35, metalness: 0.15 }),
+      curtain: new THREE.MeshStandardMaterial({ color: 0xf5f0e8, roughness: 0.95 }),
       doorFrame: new THREE.MeshStandardMaterial({ color: 0x1a1a1a }),
       door: new THREE.MeshStandardMaterial({ color: 0x8b5e3c, roughness: 0.55 }),
       lamp: new THREE.MeshStandardMaterial({ color: 0xe8d89a, emissive: 0xffcc44, emissiveIntensity: 0 }),
       lampBracket: new THREE.MeshStandardMaterial({ color: 0x888880 }),
       porch: new THREE.MeshStandardMaterial({ color: 0xd8d0c0, roughness: 0.9 }),
+      porchCeil: new THREE.MeshStandardMaterial({ color: 0xf4efe6, roughness: 0.85 }),
       pot: new THREE.MeshStandardMaterial({ color: 0xc27a4a }),
       foliageA: new THREE.MeshStandardMaterial({ color: 0x3a7030 }),
       foliageB: new THREE.MeshStandardMaterial({ color: 0x5a9040 }),
@@ -426,6 +429,12 @@
       wall.receiveShadow = true;
       group.add(wall);
 
+      const base = new THREE.Mesh(new THREE.BoxGeometry(width - 0.1, 0.35, depth - 0.1), materials.base);
+      base.position.y = 0.18;
+      base.castShadow = true;
+      base.receiveShadow = true;
+      group.add(base);
+
       const porchRecess = new THREE.Mesh(new THREE.BoxGeometry(isCorner ? 3.0 : 2.0, height, 1.0), materials.wall);
       porchRecess.position.set(0, height / 2, depth / 2 - 0.5);
       group.add(porchRecess);
@@ -437,6 +446,11 @@
         col.castShadow = true;
         group.add(col);
       }
+
+      const porchCanopy = new THREE.Mesh(new THREE.BoxGeometry(isCorner ? 3.2 : 2.2, 0.18, 1.6), materials.porchCeil);
+      porchCanopy.position.set(0, height + 0.05, depth / 2 + 0.4);
+      porchCanopy.castShadow = true;
+      group.add(porchCanopy);
 
       const roofGeo = createHippedRoof(width, depth, height, isCorner ? 3.0 : 2.4);
       const roof = new THREE.Mesh(roofGeo, materials.roof);
@@ -455,6 +469,10 @@
           pane.position.set(frame.position.x - 0.65 + p * 0.65, 1.5, depth / 2 + 0.06);
           group.add(pane);
         }
+
+        const curtain = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 1.2), materials.curtain);
+        curtain.position.set(frame.position.x, 1.5, depth / 2 - 0.02);
+        group.add(curtain);
       }
 
       const doorFrame = new THREE.Mesh(new THREE.BoxGeometry(1.0, 2.2, 0.1), materials.doorFrame);
@@ -481,6 +499,10 @@
       porchStep.position.set(0, 0.06, depth / 2 + 0.8);
       group.add(porchStep);
 
+      const porchStep2 = new THREE.Mesh(new THREE.BoxGeometry(isCorner ? 3.0 : 2.0, 0.1, 0.4), materials.porch);
+      porchStep2.position.set(0, 0.16, depth / 2 + 1.05);
+      group.add(porchStep2);
+
       const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.18, 0.28, 12), materials.pot);
       pot.position.set(-0.6, 0.14, depth / 2 + 0.2);
       group.add(pot);
@@ -488,6 +510,13 @@
       const foliage = new THREE.Mesh(new THREE.SphereGeometry(0.3, 12, 12), Math.random() > 0.5 ? materials.foliageA : materials.foliageB);
       foliage.position.set(-0.6, 0.5, depth / 2 + 0.2);
       group.add(foliage);
+
+      const pot2 = pot.clone();
+      pot2.position.set(0.7, 0.14, depth / 2 + 0.2);
+      group.add(pot2);
+      const foliage2 = new THREE.Mesh(new THREE.SphereGeometry(0.28, 12, 12), Math.random() > 0.5 ? materials.foliageA : materials.foliageB);
+      foliage2.position.set(0.7, 0.48, depth / 2 + 0.2);
+      group.add(foliage2);
 
       const ac = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.3, 0.5), materials.ac);
       ac.position.set(0.6, height + 0.4, -0.6);
@@ -515,12 +544,12 @@
       scene.add(court);
 
       for (let i = 0; i < 10; i++) {
-        const line = new THREE.Mesh(new THREE.BoxGeometry(8, 0.001, 0.04), materials.pavingLine);
+        const line = new THREE.Mesh(new THREE.BoxGeometry(8, 0.002, 0.05), materials.pavingLine);
         line.position.set(0, 0.03, -7.2 + i * 1.6);
         scene.add(line);
       }
       for (let i = 0; i < 5; i++) {
-        const line = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.001, 16), materials.pavingLine);
+        const line = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.002, 16), materials.pavingLine);
         line.position.set(-3.2 + i * 1.6, 0.03, 0);
         scene.add(line);
       }
@@ -528,6 +557,14 @@
       const entry = new THREE.Mesh(new THREE.BoxGeometry(5, 0.05, 3), materials.paving);
       entry.position.set(0, 0.02, 9.5);
       scene.add(entry);
+
+      const curbMat = new THREE.MeshStandardMaterial({ color: 0xb8b0a0, roughness: 0.95 });
+      const curbL = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.08, 16.4), curbMat);
+      curbL.position.set(-4.1, 0.06, 0);
+      scene.add(curbL);
+      const curbR = curbL.clone();
+      curbR.position.set(4.1, 0.06, 0);
+      scene.add(curbR);
 
       const step1 = new THREE.Mesh(new THREE.BoxGeometry(5, 0.1, 0.3), new THREE.MeshStandardMaterial({ color: 0xc0b8a8 }));
       step1.position.set(0, 0.05, 8.7);
@@ -797,7 +834,7 @@
       stopTour();
       if (view === 'aerial') { targetPhi = 0.08; targetRadius = 26; }
       if (view === 'threequarter') { targetPhi = 0.58; targetRadius = 22; targetTheta = 0.78; }
-      if (view === 'facade') { targetPhi = 1.25; targetRadius = 16; targetTheta = 0; }
+      if (view === 'facade') { targetPhi = 1.3; targetRadius = 18; targetTheta = Math.PI / 2; }
     }
 
     document.querySelectorAll('.controls-bar button').forEach(btn => {
