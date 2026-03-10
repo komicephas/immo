@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+ï»¿import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
@@ -15,9 +15,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Cour Immo — Présentation & Maquette 3D",
+  title: "Cour Immo â€” PrÃ©sentation & Maquette 3D",
   description:
-    "Découvre Cour Immo : un projet immobilier premium présenté avec une maquette 3D interactive.",
+    "DÃ©couvre Cour Immo : un projet immobilier premium prÃ©sentÃ© avec une maquette 3D interactive.",
 };
 
 export default function RootLayout({
@@ -33,3 +33,4 @@ export default function RootLayout({
     </html>
   );
 }
+

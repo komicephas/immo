@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   --sand-1: #f6f1e9;
@@ -63,3 +63,4 @@ body {
 .shimmer {
   animation: shimmer 7s ease-in-out infinite;
 }
+

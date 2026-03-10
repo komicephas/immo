@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Canvas } from "@react-three/fiber";
 import { Environment, Float, OrbitControls } from "@react-three/drei";
@@ -132,3 +132,4 @@ export default function MaquetteScene() {
     </div>
   );
 }
+
