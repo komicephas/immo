@@ -190,6 +190,122 @@
       width: 62%;
       height: 100%;
     }
+    .image-fill {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .image-fill img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .image-split {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      padding: 24px;
+    }
+    .image-split img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+    .image-grid {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      padding: 24px;
+    }
+    .image-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+    .layout-right .left-panel { left: auto; right: 24px; }
+    .layout-bottom .left-panel { top: auto; bottom: 24px; }
+    .layout-wide .left-panel { width: 45%; }
+    .layout-narrow .left-panel { width: 34%; }
+    .dash {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .dash li::before {
+      content: "-";
+      margin-right: 8px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .rail {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      padding: 32px;
+      display: grid;
+      gap: 12px;
+      align-content: center;
+    }
+    .rail-item {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(26,45,107,0.15);
+      border-left: 4px solid var(--orange);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      color: #2a3244;
+    }
+    .kpi-board {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-content: center;
+    }
+    .kpi-card {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(26,45,107,0.15);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+    .kpi-card .val {
+      font-family: "Montserrat", sans-serif;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+    .kpi-card .lab {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
     .photo-illustration {
       position: absolute;
       right: 0;
@@ -231,7 +347,7 @@
       width: 62%;
       height: 100%;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 12px;
       padding: 24px;
     }
@@ -242,22 +358,22 @@
       overflow: hidden;
       display: grid;
       align-content: start;
-      gap: 8px;
-      padding: 12px;
+      gap: 6px;
+      padding: 8px;
     }
     .team-card img {
       width: 100%;
-      height: 120px;
+      height: 90px;
       object-fit: cover;
       border-radius: 12px;
     }
     .team-role {
       font-family: "Montserrat", sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.7rem;
       color: var(--navy);
     }
     .team-name {
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       color: var(--muted);
     }
     .finance-box {
@@ -471,7 +587,7 @@
 
     <div class="stage">
       <div class="deck" id="deck">
-        <div class="slide" data-title="Ouverture" style="background: linear-gradient(135deg, #f6d9a8, #fef2d6);">
+        <div class="slide layout-wide" data-title="Ouverture" style="background: linear-gradient(135deg, #f6d9a8, #fef2d6);">
           <div class="slide-number">01</div>
           <div class="left-panel">
             <div class="label panel-item">PRÉSENTATION MARQUE</div>
@@ -486,12 +602,17 @@
           </div>
         </div>
 
-        <div class="slide" data-title="Problème" style="background: linear-gradient(135deg, #f3f4f7, #f9fbff);">
+        <div class="slide layout-bottom layout-narrow" data-title="Problème" style="background: linear-gradient(135deg, #f3f4f7, #f9fbff);">
           <div class="slide-number">02</div>
           <div class="left-panel">
             <div class="label panel-item">CONTEXTE</div>
             <div class="title panel-item">Le défi du logement à Lomé</div>
             <div class="desc panel-item">Forte demande de logements pour étudiants et jeunes travailleurs face à une offre inadaptée.</div>
+            <ul class="dash panel-item">
+              <li>Offre limitée et vétuste</li>
+              <li>Prix élevés sur le marché formel</li>
+              <li>Qualité et sécurité insuffisantes</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Démographie</span><span class="tag">Demande</span><span class="tag">Accessibilité</span>
             </div>
@@ -501,251 +622,171 @@
           </div>
         </div>
 
-        <div class="slide" data-title="Solution" style="background: linear-gradient(135deg, #f5f0e8, #f9fff2);">
+        <div class="slide layout-right" data-title="Solution" style="background: linear-gradient(135deg, #f5f0e8, #f9fff2);">
           <div class="slide-number">03</div>
           <div class="left-panel">
             <div class="label panel-item">NOTRE RÉPONSE</div>
             <div class="title panel-item">La solution COUR IMMO</div>
             <div class="desc panel-item">Rénovation de cours communes en studios modernes, équipés et gérés professionnellement.</div>
+            <ul class="dash panel-item">
+              <li>Requalification complète des espaces</li>
+              <li>Studios équipés et prêts à louer</li>
+              <li>Gestion et maintenance intégrées</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Rénovation</span><span class="tag">Équipement</span><span class="tag">Gestion</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="350" height="500" fill="#e8e0d6" />
-              <rect x="60" y="140" width="220" height="180" fill="#c7b8a8" />
-              <rect x="90" y="200" width="60" height="60" fill="#9d8b7a" />
-              <rect x="350" y="0" width="350" height="500" fill="#f4fff3" />
-              <rect x="420" y="120" width="200" height="220" fill="#ffffff" stroke="#e0d4c4" />
-              <rect x="450" y="160" width="80" height="80" fill="#dff0d2" />
-              <circle cx="570" cy="300" r="30" fill="#4a9c2f" opacity="0.8" />
-              <polygon points="330,250 370,230 370,270" fill="#e8a030" />
-              <rect x="290" y="330" width="40" height="60" fill="#b58c60" />
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/36153946/pexels-photo-36153946.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Travaux de rénovation en cours" />
           </div>
         </div>
 
-        <div class="slide" data-title="Maquette 3D" style="background: linear-gradient(135deg, #e9eef7, #f6f7f9);">
+        <div class="slide layout-bottom" data-title="Maquette 3D" style="background: linear-gradient(135deg, #e9eef7, #f6f7f9);">
           <div class="slide-number">04</div>
           <div class="left-panel">
             <div class="label panel-item">ARCHITECTURE</div>
           <div class="title panel-item">Découvrez l'espace en 3D</div>
           <div class="desc panel-item">Modélisation immersive de la cour rénovée. Visualisez chaque studio et les espaces communs.</div>
+          <ul class="dash panel-item">
+            <li>Vue aérienne et façade</li>
+            <li>Visite guidée interactive</li>
+            <li>Hotspots d'information</li>
+          </ul>
           <a class="cta-link panel-item" href="/maquette.html" target="_blank">Lancer la maquette 3D</a>
           <div class="tags panel-item">
               <span class="tag">Interactif</span><span class="tag">3D</span><span class="tag">Visite guidée</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f0f2f7" />
-              <polygon points="160,130 520,130 600,250 240,250" fill="#d4c5a9" />
-              <polygon points="220,250 580,250 520,370 160,370" fill="#e1d2b8" />
-              <rect x="230" y="140" width="80" height="70" fill="#1a2d6b" />
-              <rect x="320" y="140" width="80" height="70" fill="#1a2d6b" />
-              <rect x="410" y="140" width="80" height="70" fill="#1a2d6b" />
-              <rect x="250" y="270" width="80" height="70" fill="#1a2d6b" />
-              <rect x="340" y="270" width="80" height="70" fill="#1a2d6b" />
-              <rect x="430" y="270" width="80" height="70" fill="#1a2d6b" />
-              <rect x="230" y="110" width="260" height="20" fill="#4a9c2f" />
-              <circle cx="200" cy="110" r="18" fill="#4a9c2f" />
-              <circle cx="540" cy="110" r="18" fill="#4a9c2f" />
-              <circle cx="200" cy="390" r="18" fill="#4a9c2f" />
-              <circle cx="540" cy="390" r="18" fill="#4a9c2f" />
-              <rect x="360" y="350" width="40" height="20" fill="#9aa3ad" />
-              <circle cx="370" cy="230" r="8" fill="#e8a030" />
-              <circle cx="390" cy="240" r="8" fill="#e8a030" />
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/13203186/pexels-photo-13203186.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Rendu architectural 3D de cour" />
           </div>
         </div>
-        <div class="slide" data-title="Offre Locative" style="background: linear-gradient(135deg, #fef7ed, #f6fbff);">
+        <div class="slide layout-wide" data-title="Offre Locative" style="background: linear-gradient(135deg, #fef7ed, #f6fbff);">
           <div class="slide-number">05</div>
           <div class="left-panel">
             <div class="label panel-item">NOS STUDIOS</div>
             <div class="title panel-item">Deux formules adaptées</div>
             <div class="desc panel-item">Studio Standard à 25 000 FCFA (jusqu'à 35 000 FCFA selon équipement) et Studio Palette à 20 000 FCFA. Tout équipé, charges incluses.</div>
+            <ul class="dash panel-item">
+              <li>Literie, rangements et ventilation</li>
+              <li>Cuisine et douche privatives</li>
+              <li>Charges courantes incluses</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">25 000 FCFA</span><span class="tag">20 000 FCFA</span><span class="tag">Tout équipé</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#fff4e3" />
-              <rect x="320" y="150" width="200" height="120" fill="#f5f0e8" stroke="#d8c9b0" />
-              <rect x="340" y="170" width="90" height="60" fill="#ffffff" />
-              <rect x="450" y="170" width="50" height="70" fill="#c8cdd6" />
-              <rect x="340" y="250" width="140" height="40" fill="#e8a030" opacity="0.5" />
-              <rect x="500" y="240" width="70" height="50" fill="#f1e3c8" />
-              <circle cx="560" cy="200" r="18" fill="#4a9c2f" />
-              <line x1="340" y1="150" x2="390" y2="110" stroke="#f1c973" stroke-width="6" />
-            </svg>
+          <div class="image-split">
+            <img src="https://images.pexels.com/photos/7214167/pexels-photo-7214167.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Studio standard" />
+            <img src="https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Studio palette" />
           </div>
         </div>
 
-        <div class="slide" data-title="Label Cour Propre" style="background: linear-gradient(135deg, #f0fff4, #f7fff9);">
+        <div class="slide layout-right" data-title="Label Cour Propre" style="background: linear-gradient(135deg, #f0fff4, #f7fff9);">
           <div class="slide-number">06</div>
           <div class="left-panel">
             <div class="label panel-item">NOS SERVICES</div>
             <div class="title panel-item">Label Cour Propre</div>
             <div class="desc panel-item">Un cadre de vie sain, sécurisé et connecté grâce à nos 6 services inclus dans chaque unité.</div>
+            <ul class="dash panel-item">
+              <li>Nettoyage & assainissement</li>
+              <li>Internet & connectivité</li>
+              <li>Eau & éclairage</li>
+              <li>Maintenance régulière</li>
+              <li>Sécurité & contrôle d'accès</li>
+              <li>Gestion des parties communes</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Nettoyage</span><span class="tag">Internet</span><span class="tag">Eau</span><span class="tag">Sécurité</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f2fff4" />
-              <circle cx="400" cy="250" r="90" fill="#4a9c2f" opacity="0.15" />
-              <path d="M360 210 L440 210 L430 300 L370 300 Z" fill="#4a9c2f" opacity="0.7" />
-              <circle cx="400" cy="240" r="20" fill="#ffffff" />
-              <path d="M390 240 L398 248 L412 230" stroke="#4a9c2f" stroke-width="6" fill="none" />
-              <g fill="#e8a030" opacity="0.8">
-                <circle cx="260" cy="160" r="10" />
-                <circle cx="520" cy="160" r="10" />
-                <circle cx="260" cy="340" r="10" />
-                <circle cx="520" cy="340" r="10" />
-              </g>
-              <g stroke="#1a2d6b" stroke-width="3">
-                <path d="M300 130 Q330 110 360 130" />
-                <path d="M440 130 Q470 110 500 130" />
-              </g>
-              <circle cx="300" cy="300" r="14" fill="#8ad3ff" />
-              <circle cx="500" cy="300" r="14" fill="#ffd6a8" />
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/4440525/pexels-photo-4440525.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Services de nettoyage et entretien" />
           </div>
         </div>
 
-        <div class="slide" data-title="Marché Cible" style="background: linear-gradient(135deg, #eef4ff, #f7fbff);">
+        <div class="slide layout-bottom" data-title="Marché Cible" style="background: linear-gradient(135deg, #eef4ff, #f7fbff);">
           <div class="slide-number">07</div>
           <div class="left-panel">
             <div class="label panel-item">NOS CLIENTS</div>
             <div class="title panel-item">Étudiants et jeunes actifs</div>
             <div class="desc panel-item">Adidogomé concentre universités et entreprises. Notre cible : les 18-30 ans en quête de logement.</div>
+            <ul class="dash panel-item">
+              <li>Étudiants L3 / Master</li>
+              <li>Jeunes travailleurs</li>
+              <li>Primo-locataires urbains</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Étudiants</span><span class="tag">Travailleurs</span><span class="tag">18-30 ans</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#e8f1ff" />
-              <rect x="120" y="260" width="450" height="120" fill="#c6d6ef" />
-              <rect x="160" y="220" width="60" height="40" fill="#9fb4d1" />
-              <rect x="250" y="210" width="90" height="50" fill="#9fb4d1" />
-              <rect x="360" y="230" width="70" height="40" fill="#9fb4d1" />
-              <rect x="460" y="210" width="90" height="50" fill="#9fb4d1" />
-              <g>
-                <circle cx="220" cy="170" r="26" fill="#1a2d6b" />
-                <rect x="200" y="200" width="40" height="60" fill="#4a9c2f" />
-                <rect x="190" y="220" width="20" height="30" fill="#1a2d6b" />
-              </g>
-              <g>
-                <circle cx="350" cy="170" r="26" fill="#1a2d6b" />
-                <rect x="330" y="200" width="40" height="60" fill="#e8a030" />
-                <rect x="320" y="230" width="20" height="30" fill="#1a2d6b" />
-              </g>
-              <g>
-                <circle cx="480" cy="170" r="26" fill="#1a2d6b" />
-                <rect x="460" y="200" width="40" height="60" fill="#4a9c2f" />
-                <circle cx="520" cy="190" r="22" fill="#1a2d6b" />
-                <rect x="500" y="210" width="40" height="50" fill="#e8a030" />
-              </g>
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/6146971/pexels-photo-6146971.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Étudiants et jeunes actifs" />
           </div>
         </div>
 
-        <div class="slide" data-title="Positionnement" style="background: linear-gradient(135deg, #f8f6ef, #f0f5ff);">
+        <div class="slide layout-wide" data-title="Positionnement" style="background: linear-gradient(135deg, #f8f6ef, #f0f5ff);">
           <div class="slide-number">08</div>
           <div class="left-panel">
             <div class="label panel-item">NOTRE PLACE</div>
             <div class="title panel-item">Entre deux extrêmes</div>
             <div class="desc panel-item">COUR IMMO occupe le segment intermédiaire : logement moderne à prix accessible.</div>
+            <ul class="dash panel-item">
+              <li>Cours classiques : prix bas, faible qualité</li>
+              <li>COUR IMMO : équilibre confort / budget</li>
+              <li>Apparts modernes : prix élevés</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Accessible</span><span class="tag">Moderne</span><span class="tag">Unique</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f5f0e8" />
-              <rect x="200" y="240" width="90" height="120" fill="#b5b5b5" />
-              <rect x="320" y="210" width="140" height="160" fill="#1a2d6b" />
-              <rect x="500" y="170" width="120" height="220" fill="#6da0d8" />
-              <rect x="340" y="180" width="100" height="30" fill="#4a9c2f" />
-              <circle cx="390" cy="190" r="60" fill="#4a9c2f" opacity="0.2" />
-              <line x1="220" y1="390" x2="260" y2="390" stroke="#e8a030" stroke-width="4" />
-              <line x1="360" y1="390" x2="420" y2="390" stroke="#e8a030" stroke-width="4" />
-              <line x1="520" y1="390" x2="600" y2="390" stroke="#e8a030" stroke-width="4" />
-            </svg>
+          <div class="image-grid">
+            <img src="https://images.pexels.com/photos/18503676/pexels-photo-18503676.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cours classiques" />
+            <img src="https://images.pexels.com/photos/12009300/pexels-photo-12009300.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Segment intermédiaire" />
+            <img src="https://images.pexels.com/photos/4858462/pexels-photo-4858462.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Logements modernes" />
+            <img src="https://images.pexels.com/photos/5181992/pexels-photo-5181992.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Ville en développement" />
           </div>
         </div>
-        <div class="slide" data-title="Business Model" style="background: linear-gradient(135deg, #f5f8ff, #f7f3e8);">
+        <div class="slide layout-right" data-title="Business Model" style="background: linear-gradient(135deg, #f5f8ff, #f7f3e8);">
           <div class="slide-number">09</div>
           <div class="left-panel">
             <div class="label panel-item">MODÈLE ÉCONOMIQUE</div>
             <div class="title panel-item">4 étapes simples</div>
             <div class="desc panel-item">Location longue durée des cours (8 000 FCFA/chambre), rénovation, équipement, puis gestion locative professionnelle pour une rentabilité durable.</div>
+            <ul class="dash panel-item">
+              <li>Location de la cour</li>
+              <li>Travaux & aménagements</li>
+              <li>Commercialisation</li>
+              <li>Gestion locative continue</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Location</span><span class="tag">Rénovation</span><span class="tag">Gestion</span><span class="tag">Revenus</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f2f6ff" />
-              <g fill="#1a2d6b" opacity="0.8">
-                <rect x="250" y="160" width="90" height="60" rx="12" />
-                <rect x="360" y="160" width="90" height="60" rx="12" />
-                <rect x="470" y="160" width="90" height="60" rx="12" />
-                <rect x="580" y="160" width="90" height="60" rx="12" />
-              </g>
-              <g stroke="#4a9c2f" stroke-width="4">
-                <line x1="340" y1="190" x2="360" y2="190" />
-                <line x1="450" y1="190" x2="470" y2="190" />
-                <line x1="560" y1="190" x2="580" y2="190" />
-              </g>
-              <g fill="#f5f0e8">
-                <circle cx="295" cy="190" r="12" />
-                <rect x="285" y="180" width="20" height="20" />
-                <rect x="385" y="180" width="20" height="20" />
-                <polygon points="495,200 505,180 515,200" />
-                <circle cx="625" cy="190" r="12" />
-              </g>
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/34023907/pexels-photo-34023907.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Clés et investissement immobilier" />
           </div>
         </div>
 
-        <div class="slide" data-title="Mise en Œuvre" style="background: linear-gradient(135deg, #f6f8ff, #fff4ea);">
+        <div class="slide layout-bottom" data-title="Mise en Œuvre" style="background: linear-gradient(135deg, #f6f8ff, #fff4ea);">
           <div class="slide-number">10</div>
           <div class="left-panel">
             <div class="label panel-item">PLANNING</div>
             <div class="title panel-item">4 phases en 4 mois</div>
             <div class="desc panel-item">Un déploiement rapide et structuré de l'audit initial jusqu'à la gestion locative continue.</div>
+            <ul class="dash panel-item">
+              <li>Mois 1 : Audit & rénovation</li>
+              <li>Mois 2 : Équipement des studios</li>
+              <li>Mois 3 : Commercialisation</li>
+              <li>Mois 4+ : Gestion continue</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Mois 1</span><span class="tag">Mois 2</span><span class="tag">Mois 3</span><span class="tag">Mois 4+</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f4f7ff" />
-              <line x1="220" y1="260" x2="620" y2="260" stroke="#4a9c2f" stroke-width="6" />
-              <g fill="#1a2d6b">
-                <circle cx="260" cy="260" r="18" />
-                <circle cx="360" cy="260" r="18" />
-                <circle cx="460" cy="260" r="18" />
-                <circle cx="560" cy="260" r="18" />
-              </g>
-              <g fill="#f5f0e8">
-                <text x="252" y="265" font-size="14" fill="#f5f0e8">1</text>
-                <text x="352" y="265" font-size="14" fill="#f5f0e8">2</text>
-                <text x="452" y="265" font-size="14" fill="#f5f0e8">3</text>
-                <text x="552" y="265" font-size="14" fill="#f5f0e8">4</text>
-              </g>
-              <rect x="210" y="190" width="24" height="18" fill="#e8a030" />
-              <rect x="320" y="180" width="24" height="18" fill="#e8a030" />
-              <rect x="420" y="180" width="24" height="18" fill="#e8a030" />
-              <rect x="520" y="180" width="24" height="18" fill="#e8a030" />
-              <rect x="190" y="240" width="20" height="20" fill="#1a2d6b" />
-              <text x="590" y="270" font-size="18" fill="#4a9c2f">8</text>
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/28353121/pexels-photo-28353121.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Planning et calendrier de déploiement" />
           </div>
         </div>
 
@@ -820,44 +861,55 @@
               <div class="team-role">Relation locataires</div>
               <div class="team-name">YAO Thérèse</div>
             </div>
+            <div class="team-card">
+              <img src="/team-promoteur.jpeg" alt="Promoteur Cour Immo" />
+              <div class="team-role">Promoteur (portrait)</div>
+              <div class="team-name">Équipe direction</div>
+            </div>
+            <div class="team-card">
+              <img src="/team-gestionnaire.jpeg" alt="Gestionnaire Cour Immo" />
+              <div class="team-role">Gestionnaire (portrait)</div>
+              <div class="team-name">Équipe gestion</div>
+            </div>
+            <div class="team-card">
+              <img src="/team-artisan.jpeg" alt="Artisans partenaires" />
+              <div class="team-role">Artisans partenaires</div>
+              <div class="team-name">Équipe travaux</div>
+            </div>
           </div>
         </div>
 
-        <div class="slide" data-title="Risques & Solutions" style="background: linear-gradient(135deg, #fff1f1, #f7f7ff);">
+        <div class="slide layout-right" data-title="Risques & Solutions" style="background: linear-gradient(135deg, #fff1f1, #f7f7ff);">
           <div class="slide-number">12</div>
           <div class="left-panel">
             <div class="label panel-item">GESTION DES RISQUES</div>
             <div class="title panel-item">Anticipés et maîtrisés</div>
             <div class="desc panel-item">Chaque risque identifié dispose d'une solution concrète pour protéger l'investissement.</div>
+            <ul class="dash panel-item">
+              <li>Vacance : ciblage + fidélisation</li>
+              <li>Impayés : caution & scoring</li>
+              <li>Dégradation : maintenance préventive</li>
+              <li>Pannes : artisans partenaires</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Vacance</span><span class="tag">Impayés</span><span class="tag">Dégradation</span><span class="tag">Pannes</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#fff3f3" />
-              <path d="M420 140 L500 180 L480 320 L420 360 L360 320 L340 180 Z" fill="#4a9c2f" opacity="0.85" />
-              <rect x="395" y="220" width="50" height="40" fill="#ffffff" />
-              <polygon points="395,220 420,200 445,220" fill="#ffffff" />
-              <g fill="#e05555">
-                <circle cx="260" cy="180" r="18" />
-                <circle cx="540" cy="180" r="18" />
-                <circle cx="260" cy="330" r="18" />
-                <circle cx="540" cy="330" r="18" />
-              </g>
-              <g stroke="#e05555" stroke-width="4">
-                <line x1="250" y1="170" x2="270" y2="190" />
-                <line x1="270" y1="170" x2="250" y2="190" />
-              </g>
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/30942719/pexels-photo-30942719.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signalétique de prévention des risques" />
           </div>
         </div>
-        <div class="slide" data-title="Investissement" style="background: linear-gradient(135deg, #f2f6ff, #f7f0e8);">
+        <div class="slide layout-wide" data-title="Investissement" style="background: linear-gradient(135deg, #f2f6ff, #f7f0e8);">
           <div class="slide-number">13</div>
           <div class="left-panel">
             <div class="label panel-item">FINANCEMENT</div>
             <div class="title panel-item">2 847 000 FCFA</div>
             <div class="desc panel-item">Un investissement structuré en trois postes : avance propriétaire, équipement et rénovation.</div>
+            <ul class="dash panel-item">
+              <li>Avance propriétaire : 1 500 000 FCFA</li>
+              <li>Équipement : 1 347 000 FCFA</li>
+              <li>Rénovation : 300 000 FCFA</li>
+            </ul>
             <div class="finance-box panel-item">
               <div class="finance-row"><span>Avance propriétaire</span><strong>1 500 000 FCFA</strong></div>
               <div class="finance-row"><span>Équipement</span><strong>1 347 000 FCFA</strong></div>
@@ -867,25 +919,22 @@
               <span class="tag">1 500 000</span><span class="tag">1 347 000</span><span class="tag">300 000 FCFA</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f5f0e8" />
-              <circle cx="420" cy="250" r="90" fill="none" stroke="#1a2d6b" stroke-width="18" stroke-dasharray="300 120" />
-              <circle cx="420" cy="250" r="90" fill="none" stroke="#4a9c2f" stroke-width="18" stroke-dasharray="210 210" stroke-dashoffset="-300" />
-              <circle cx="420" cy="250" r="90" fill="none" stroke="#c8cdd6" stroke-width="18" stroke-dasharray="60 360" stroke-dashoffset="-510" />
-              <circle cx="420" cy="250" r="40" fill="#e8a030" opacity="0.25" />
-              <rect x="405" y="220" width="30" height="50" fill="#1a2d6b" />
-              <rect x="395" y="260" width="50" height="20" fill="#1a2d6b" />
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/35028998/pexels-photo-35028998.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Investissement et budget" />
           </div>
         </div>
 
-        <div class="slide" data-title="Performance" style="background: linear-gradient(135deg, #f5f7ff, #fdf4e8);">
+        <div class="slide layout-right" data-title="Performance" style="background: linear-gradient(135deg, #f5f7ff, #fdf4e8);">
           <div class="slide-number">14</div>
           <div class="left-panel">
             <div class="label panel-item">RENTABILITÉ</div>
             <div class="title panel-item">95 000 FCFA de profit net</div>
             <div class="desc panel-item">Revenus de 270 000 FCFA pour des charges de 175 000 FCFA. Un retour sur investissement de 3,3%/mois.</div>
+            <ul class="dash panel-item">
+              <li>Revenus : 270 000 FCFA</li>
+              <li>Charges : 175 000 FCFA</li>
+              <li>Profit net : 95 000 FCFA</li>
+            </ul>
             <div class="finance-box panel-item">
               <div class="finance-row"><span>Revenus mensuels</span><strong>270 000 FCFA</strong></div>
               <div class="finance-row"><span>Charges mensuelles</span><strong>175 000 FCFA</strong></div>
@@ -896,74 +945,48 @@
               <span class="tag">270K revenus</span><span class="tag">175K charges</span><span class="tag">3.3% ROI</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f7f2e9" />
-              <rect x="320" y="210" width="50" height="140" fill="#1a2d6b" />
-              <rect x="390" y="250" width="50" height="100" fill="#c8cdd6" />
-              <rect x="460" y="230" width="50" height="120" fill="#4a9c2f" />
-              <polyline points="320,190 380,160 430,170 510,130" fill="none" stroke="#4a9c2f" stroke-width="6" />
-              <circle cx="510" cy="130" r="10" fill="#4a9c2f" />
-              <rect x="520" y="90" width="80" height="30" rx="15" fill="#e8a030" />
-              <text x="535" y="110" fill="#ffffff" font-size="12">ROI</text>
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/7108077/pexels-photo-7108077.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Tableau de bord financier" />
           </div>
         </div>
 
-        <div class="slide" data-title="Croissance" style="background: linear-gradient(135deg, #f0f6ff, #f7fff1);">
+        <div class="slide layout-bottom" data-title="Croissance" style="background: linear-gradient(135deg, #f0f6ff, #f7fff1);">
           <div class="slide-number">15</div>
           <div class="left-panel">
             <div class="label panel-item">VISION</div>
             <div class="title panel-item">Objectif : 6 cours en 3 ans</div>
             <div class="desc panel-item">Reproduire le modèle sur plusieurs cours communes pour créer un réseau de logements étudiants à Lomé.</div>
+            <ul class="dash panel-item">
+              <li>Année 1 : 1 cour pilote</li>
+              <li>Année 2 : 3 cours actives</li>
+              <li>Année 3 : 6 cours opérationnelles</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Année 1</span><span class="tag">Année 2</span><span class="tag">Année 3</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <rect width="700" height="500" fill="#f2f8ff" />
-              <rect x="240" y="320" width="50" height="40" fill="#1a2d6b" />
-              <rect x="330" y="300" width="60" height="60" fill="#1a2d6b" />
-              <rect x="410" y="280" width="70" height="80" fill="#1a2d6b" />
-              <rect x="510" y="260" width="80" height="100" fill="#1a2d6b" />
-              <path d="M240 260 Q360 180 520 140" stroke="#4a9c2f" stroke-width="8" fill="none" />
-              <circle cx="520" cy="140" r="12" fill="#4a9c2f" />
-              <circle cx="560" cy="120" r="6" fill="#e8a030" />
-              <circle cx="580" cy="110" r="4" fill="#e8a030" />
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/18042396/pexels-photo-18042396.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Croissance urbaine et développement" />
           </div>
         </div>
 
-        <div class="slide" data-title="Conclusion" style="background: linear-gradient(135deg, #1a2d6b, #e8a030);">
+        <div class="slide layout-wide" data-title="Conclusion" style="background: linear-gradient(135deg, #1a2d6b, #e8a030);">
           <div class="slide-number">16</div>
           <div class="left-panel">
             <div class="label panel-item">CONCLUSION</div>
             <div class="title panel-item">Investissez dans l'avenir du logement</div>
             <div class="desc panel-item">COUR IMMO — solution rapide, rentable et à fort impact social pour la jeunesse de Lomé.</div>
+            <ul class="dash panel-item">
+              <li>Impact social local fort</li>
+              <li>Rentabilité mensuelle stable</li>
+              <li>Modèle duplicable à Lomé</li>
+            </ul>
             <div class="tags panel-item">
               <span class="tag">Impact social</span><span class="tag">Rentable</span><span class="tag">Scalable</span>
             </div>
           </div>
-          <div class="right-illustration">
-            <svg viewBox="0 0 700 500" width="100%" height="100%">
-              <defs>
-                <linearGradient id="sunset" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#1a2d6b" />
-                  <stop offset="1" stop-color="#e8a030" />
-                </linearGradient>
-              </defs>
-              <rect width="700" height="500" fill="url(#sunset)" />
-              <rect y="320" width="700" height="80" fill="#1a1a2e" />
-              <rect x="340" y="260" width="140" height="110" fill="#1a2d6b" />
-              <rect x="360" y="230" width="100" height="30" fill="#4a9c2f" />
-              <circle cx="420" cy="250" r="80" fill="#e8a030" opacity="0.7" />
-              <g stroke="#f6d68a" stroke-width="6" opacity="0.6">
-                <line x1="420" y1="140" x2="420" y2="80" />
-                <line x1="360" y1="150" x2="320" y2="100" />
-                <line x1="480" y1="150" x2="520" y2="100" />
-              </g>
-            </svg>
+          <div class="image-fill">
+            <img src="https://images.pexels.com/photos/15266401/pexels-photo-15266401.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Horizon urbain au crépuscule" />
           </div>
         </div>
       </div>
