@@ -224,6 +224,30 @@
       font-size: 12px;
       text-decoration: none;
     }
+    .finance-box {
+      background: rgba(245, 240, 232, 0.7);
+      border: 1px solid rgba(26,45,107,0.2);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: grid;
+      gap: 6px;
+    }
+    .finance-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: #2a3244;
+    }
+    .finance-row strong {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .finance-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
 
     .panel-item {
       opacity: 0;
@@ -751,6 +775,11 @@
             <div class="label panel-item">FINANCEMENT</div>
             <div class="title panel-item">2 847 000 FCFA</div>
             <div class="desc panel-item">Un investissement structuré en trois postes : avance propriétaire, équipement et rénovation.</div>
+            <div class="finance-box panel-item">
+              <div class="finance-row"><span>Avance propriétaire</span><strong>1 500 000 FCFA</strong></div>
+              <div class="finance-row"><span>Équipement</span><strong>1 347 000 FCFA</strong></div>
+              <div class="finance-row"><span>Rénovation</span><strong>300 000 FCFA</strong></div>
+            </div>
             <div class="tags panel-item">
               <span class="tag">1 500 000</span><span class="tag">1 347 000</span><span class="tag">300 000 FCFA</span>
             </div>
@@ -774,6 +803,12 @@
             <div class="label panel-item">RENTABILITÉ</div>
             <div class="title panel-item">95 000 FCFA de profit net</div>
             <div class="desc panel-item">Revenus de 270 000 FCFA pour des charges de 175 000 FCFA. Un retour sur investissement de 3,3%/mois.</div>
+            <div class="finance-box panel-item">
+              <div class="finance-row"><span>Revenus mensuels</span><strong>270 000 FCFA</strong></div>
+              <div class="finance-row"><span>Charges mensuelles</span><strong>175 000 FCFA</strong></div>
+              <div class="finance-row"><span>Profit net</span><strong>95 000 FCFA</strong></div>
+              <div class="finance-note">Seuil de rentabilité estimé : ~30 mois</div>
+            </div>
             <div class="tags panel-item">
               <span class="tag">270K revenus</span><span class="tag">175K charges</span><span class="tag">3.3% ROI</span>
             </div>
